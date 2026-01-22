@@ -1,6 +1,6 @@
 {
   "name": "claude-skill-readiness",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Agent Readiness skill for Claude Code - evaluate repository readiness for autonomous AI agents",
   "keywords": [
     "claude",
