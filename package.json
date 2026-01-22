@@ -1,0 +1,37 @@
+{
+  "name": "readiness",
+  "version": "1.0.0",
+  "description": "Agent Readiness skill for Claude Code - evaluate repository readiness for autonomous AI agents",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "skill",
+    "ai",
+    "agent",
+    "readiness",
+    "autonomy",
+    "evaluation"
+  ],
+  "author": "Viktor Silakov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viktor-silakov/readiness"
+  },
+  "homepage": "https://github.com/viktor-silakov/readiness#readme",
+  "bugs": {
+    "url": "https://github.com/viktor-silakov/readiness/issues"
+  },
+  "type": "module",
+  "bin": {
+    "claude-skill-readiness": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

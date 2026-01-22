@@ -1,0 +1,19 @@
+{
+  "name": "readiness",
+  "description": "Evaluate repository readiness for autonomous AI agents. Analyzes 8 pillars (style, build, testing, docs, environment, quality, observability, security), assigns maturity level 1-5, offers auto-fix.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Viktor Silakov",
+    "url": "https://github.com/viktor-silakov"
+  },
+  "repository": "https://github.com/viktor-silakov/readiness",
+  "license": "MIT",
+  "keywords": [
+    "readiness",
+    "ai-agent",
+    "autonomous",
+    "evaluation",
+    "maturity",
+    "devops"
+  ]
+}
