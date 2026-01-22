@@ -18,15 +18,21 @@ Usage:
   npx claude-skill-readiness [command]
 
 Commands:
-  install   Install skill to .claude/skills/readiness/ (default)
-  check     Check if skill is already installed
-  update    Update existing skill files
-  remove    Remove skill from project
+  install        Install skill to .claude/skills/readiness/ (default)
+  check          Check if skill is already installed
+  update         Update existing skill files
+  remove         Remove skill from project
+  report         Generate HTML report with D3.js charts
+    <input.json>   JSON file with assessment data
+    -o <file>      Output file (default: readiness-report.html)
+    --sample       Generate report with sample data
 
 Examples:
   npx claude-skill-readiness
   npx claude-skill-readiness install
   npx claude-skill-readiness check
+  npx claude-skill-readiness report --sample
+  npx claude-skill-readiness report data.json -o report.html
 `);
 }
 
@@ -188,6 +194,38 @@ switch (command) {
   case 'remove':
     remove();
     break;
+  case 'report': {
+    const reportArgs = args.slice(1);
+    const inputFile = reportArgs.find(a => !a.startsWith('-'));
+    const outputIndex = reportArgs.indexOf('-o');
+    const outputFile = outputIndex !== -1 ? reportArgs[outputIndex + 1] : 'readiness-report.html';
+    const useSample = reportArgs.includes('--sample');
+
+    import('./generate-report.js').then(({ generateReport, generateSampleData }) => {
+      let data;
+
+      if (useSample) {
+        data = generateSampleData();
+        console.log('Using sample data...');
+      } else if (inputFile) {
+        try {
+          data = JSON.parse(readFileSync(inputFile, 'utf-8'));
+        } catch (e) {
+          console.error(`Error reading ${inputFile}:`, e.message);
+          process.exit(1);
+        }
+      } else {
+        console.log('Usage: npx claude-skill-readiness report <input.json> [-o output.html]');
+        console.log('       npx claude-skill-readiness report --sample');
+        process.exit(0);
+      }
+
+      const output = generateReport(data, outputFile);
+      console.log(`✓ Report generated: ${output}`);
+      console.log(`  Open in browser: open ${output}`);
+    });
+    break;
+  }
   case '-h':
   case '--help':
   case 'help':
