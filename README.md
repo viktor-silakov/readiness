@@ -6,7 +6,15 @@ Inspired by [Factory AI Agent Readiness](https://factory.ai/news/agent-readiness
 
 ## Installation
 
-### As Claude Code Plugin (recommended)
+### Via skills.sh (recommended)
+
+```bash
+npx skills add viktor-silakov/readiness
+```
+
+This is the easiest way to install. The skill will automatically appear in the [skills.sh leaderboard](https://skills.sh/) based on installation count.
+
+### As Claude Code Plugin
 
 ```bash
 claude plugin install readiness@https://github.com/viktor-silakov/readiness
