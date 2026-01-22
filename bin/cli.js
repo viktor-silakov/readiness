@@ -8,7 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const SKILL_NAME = 'readiness';
-const SKILL_FILES = ['SKILL.md', 'CRITERIA.md'];
+const SKILL_FILES = [
+  'SKILL.md',
+  'CRITERIA.md',
+  'OUTPUT_FORMAT.md',
+  'templates/report.html',
+  'examples/sample-output.md'
+];
 
 function printHelp() {
   console.log(`
@@ -70,6 +76,12 @@ function install(force = false) {
     if (!existsSync(sourcePath)) {
       console.error(`Source file not found: ${sourcePath}`);
       continue;
+    }
+
+    // Create subdirectory if needed
+    const targetSubdir = dirname(targetPath);
+    if (!existsSync(targetSubdir)) {
+      mkdirSync(targetSubdir, { recursive: true });
     }
 
     copyFileSync(sourcePath, targetPath);
@@ -159,7 +171,20 @@ function remove() {
     }
   }
 
-  // Try to remove directory if empty
+  // Remove subdirectories
+  for (const subdir of ['templates', 'examples', 'scripts']) {
+    const subdirPath = join(targetDir, subdir);
+    try {
+      if (existsSync(subdirPath)) {
+        rmdirSync(subdirPath);
+        console.log(`  Removed ${subdir}/ directory`);
+      }
+    } catch {
+      // Directory not empty or other error
+    }
+  }
+
+  // Try to remove main directory if empty
   try {
     rmdirSync(targetDir);
     console.log(`  Removed ${SKILL_NAME}/ directory`);
