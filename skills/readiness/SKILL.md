@@ -23,7 +23,7 @@ Audit any repository to determine readiness for autonomous AI agent workflows. P
 4. **Evaluate criteria** — Score all 81 criteria from [CRITERIA.md](CRITERIA.md)
 5. **Calculate level** — Determine maturity level 1-5 based on thresholds
 6. **Generate report** — Output visual ASCII report per [OUTPUT_FORMAT.md](OUTPUT_FORMAT.md)
-7. **Ask about HTML export** — MUST ask user if they want D3.js dashboard (mandatory step)
+7. **Ask about HTML export** — ALWAYS ask the user if they want the D3.js dashboard after the ASCII report; do not proceed until they answer
 
 ## Boundary Rules
 
@@ -92,11 +92,11 @@ An **application** is a standalone deployable unit:
 
 ## HTML Report Generation (MANDATORY)
 
-**IMPORTANT: You MUST always ask the user this question after displaying the ASCII report. Do not skip this step.**
+**IMPORTANT: You MUST ask the user this question every single time after displaying the ASCII report. Do not skip this step and do not proceed until the user responds.**
 
 Ask user:
 ```
 Would you like to generate an interactive HTML report with D3.js charts? [yes/no]
 ```
 
-Wait for user response. If yes, use template from [templates/report.html](templates/report.html) and save as `readiness-report.html`.
+Wait for user response. If yes, use template from [templates/report.html](templates/report.html) and save as `readiness-report.html`. After generation, always offer to open the report.
